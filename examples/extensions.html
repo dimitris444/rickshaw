@@ -115,43 +115,14 @@
 
 <script>
 
-//////////////
-// Set your API key first  
-xively.setKey( "miO8AVOmx4u9243LsGM0TUJ4H1eGCyLK7aFh0xxWN2hLONCY" );  
-var startOfYesterday = moment().subtract("day", 1).startOf('day');
-var endOfYesterday = moment().subtract("hour", 3).startOf('day');
-console.log(startOfYesterday);
-console.log(endOfYesterday);
-var query = { 
-  start: startOfYesterday.toJSON(), 
-  end: endOfYesterday.toJSON(), 
-  interval: 120, 
-  limit: 1000,
-};
-xively.datastream.history( "2017146907", "TEMPERATURE", query, loadData);  
-function loadData(data) {  
-  var unit = data.unit.label;
-  var series = [];
-  var filtedData = data.datapoints;
-  for (var i=0; i < filtedData.length; i++ ) {
-    var date = moment(filtedData[i].at);
-    var value = parseInt(filtedData[i].value);
-    series[i] = {x: date.unix(), y: value};
-  }
-//  drawGraph(series, unit);
-}
-
-
-
-////////////
 // set up our data series with 150 random data points
 
-//var seriesData = [[]];
-//var random = new Rickshaw.Fixtures.RandomData(150);
+var seriesData = [ [], [], [], [], [], [], [], [], [] ];
+var random = new Rickshaw.Fixtures.RandomData(150);
 
-//for (var i = 0; i < 150; i++) {
-//	random.addData(seriesData);
-//}
+for (var i = 0; i < 150; i++) {
+	random.addData(seriesData);
+}
 
 var palette = new Rickshaw.Color.Palette( { scheme: 'classic9' } );
 
@@ -167,8 +138,32 @@ var graph = new Rickshaw.Graph( {
 	series: [
 		{
 			color: palette.color(),
-			data: series,
-			name: 'TEMPERATURE'
+			data: seriesData[0],
+			name: 'Moscow'
+		}, {
+			color: palette.color(),
+			data: seriesData[1],
+			name: 'Shanghai'
+		}, {
+			color: palette.color(),
+			data: seriesData[2],
+			name: 'Amsterdam'
+		}, {
+			color: palette.color(),
+			data: seriesData[3],
+			name: 'Paris'
+		}, {
+			color: palette.color(),
+			data: seriesData[4],
+			name: 'Tokyo'
+		}, {
+			color: palette.color(),
+			data: seriesData[5],
+			name: 'London'
+		}, {
+			color: palette.color(),
+			data: seriesData[6],
+			name: 'New York'
 		}
 	]
 } );
