@@ -131,7 +131,7 @@ console.log(endOfYesterday);
 var query = { 
   start: 2015-03-01T11:01:46Z, 
   //end: endOfYesterday.toJSON(), 
-  interval: 120, 
+  interval: 10800, 
   limit: 1000,
 };
 xively.datastream.history( "2017146907", "TEMPERATURE", query, loadData);  
