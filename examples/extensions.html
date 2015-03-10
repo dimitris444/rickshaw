@@ -123,6 +123,32 @@ var random = new Rickshaw.Fixtures.RandomData(150);
 for (var i = 0; i < 150; i++) {
 	random.addData(seriesData);
 }
+xively.setKey( "miO8AVOmx4u9243LsGM0TUJ4H1eGCyLK7aFh0xxWN2hLONCY" );  
+var startOfYesterday = moment().subtract("day", 1).startOf('day');
+var endOfYesterday = moment().subtract("hour", 3).startOf('day');
+console.log(startOfYesterday);
+console.log(endOfYesterday);
+var query = { 
+  start: startOfYesterday.toJSON(), 
+  end: endOfYesterday.toJSON(), 
+  interval: 120, 
+  limit: 1000,
+};
+xively.datastream.history( "2017146907", "TEMPERATURE", query, loadData);  
+
+function loadData(data) {  
+  var unit = data.unit.label;
+  var test = [];
+  var filtedData = data.datapoints;
+  for (var i=0; i < filtedData.length; i++ ) {
+    var date = moment(filtedData[i].at);
+    var value = parseInt(filtedData[i].value);
+    series[i] = {x: date.unix(), y: value};
+  }
+ // drawGraph(series, unit);
+}
+
+
 
 var palette = new Rickshaw.Color.Palette( { scheme: 'classic9' } );
 
@@ -138,8 +164,8 @@ var graph = new Rickshaw.Graph( {
 	series: [
 		{
 			color: palette.color(),
-			data: seriesData[0],
-			name: 'Moscow'
+			data: test,
+			name: 'TEMPERATURE'
 		}, {
 			color: palette.color(),
 			data: seriesData[1],
