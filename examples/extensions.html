@@ -138,7 +138,7 @@ function loadData(data) {
     var value = parseInt(filtedData[i].value);
     series[i] = {x: date.unix(), y: value};
   }
-  drawGraph(series, unit);
+//  drawGraph(series, unit);
 }
 
 
@@ -167,11 +167,11 @@ var graph = new Rickshaw.Graph( {
 	series: [
 		{
 			color: palette.color(),
-			data: series[],
+			data: series,
 			name: 'TEMPERATURE'
 		}, {
 			color: palette.color(),
-			data: seriesData[],
+			data: seriesData,
 			name: 'Shanghai'
 		}
 	]
