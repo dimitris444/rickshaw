@@ -130,14 +130,14 @@ var query = {
 };
 xively.datastream.history( "2017146907", "TEMPERATURE", query, loadData);  
 function loadData(data) {  
-//  var unit = data.unit.label;
-  var data = [];
-//  var filtedData = data.datapoints;
-//  for (var i=0; i < filtedData.length; i++ ) {
-//    var date = moment(filtedData[i].at);
-//    var value = parseInt(filtedData[i].value);
-//    series[i] = {x: date.unix(), y: value};
-//  }
+  var unit = data.unit.label;
+  var series = [];
+  var filtedData = data.datapoints;
+  for (var i=0; i < filtedData.length; i++ ) {
+    var date = moment(filtedData[i].at);
+    var value = parseInt(filtedData[i].value);
+    series[i] = {x: date.unix(), y: value};
+  }
 //  drawGraph(series, unit);
 }
 
@@ -146,12 +146,12 @@ function loadData(data) {
 ////////////
 // set up our data series with 150 random data points
 
-var seriesData = [[]];
-var random = new Rickshaw.Fixtures.RandomData(150);
+//var seriesData = [[]];
+//var random = new Rickshaw.Fixtures.RandomData(150);
 
-for (var i = 0; i < 150; i++) {
-	random.addData(seriesData);
-}
+//for (var i = 0; i < 150; i++) {
+//	random.addData(seriesData);
+//}
 
 var palette = new Rickshaw.Color.Palette( { scheme: 'classic9' } );
 
@@ -167,7 +167,7 @@ var graph = new Rickshaw.Graph( {
 	series: [
 		{
 			color: palette.color(),
-			data: data,
+			data: series,
 			name: 'TEMPERATURE'
 		}
 	]
